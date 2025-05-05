@@ -17,3 +17,10 @@ CREATE ROLE customer LOGIN PASSWORD 'customer_password';
 GRANT CONNECT ON DATABASE mydatabase TO customer;
 GRANT USAGE ON SCHEMA public TO customer;
 GRANT SELECT ON categories, products TO customer;
+
+-- Create rol tenant_admin with full access but only to their tenant's data
+CREATE ROLE tenant_admin LOGIN PASSWORD 'tenant_admin_password';
+GRANT CONNECT ON DATABASE mydatabase TO tenant_admin;
+GRANT USAGE ON SCHEMA public TO tenant_admin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO tenant_admin;
+GRANT USAGE ON ALL SEQUENCES IN SCHEMA public TO tenant_admin;
